@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ivy_api
+    ports:
+      - "8001:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: ivy_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
